@@ -1,0 +1,5 @@
+// conversão de px(16) para rem
+@function rem-calc($size) {
+  $value: $size/16;
+  @return #{$value}rem;
+}

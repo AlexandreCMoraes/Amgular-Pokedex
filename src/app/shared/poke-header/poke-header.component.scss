@@ -1,0 +1,12 @@
+@import "../../../config-scss/rem-calc.scss";
+
+// exclusivo somente para este component
+:host {
+  header {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    // rem-calc de 40-cima e baixo- e 0-para os lados
+    padding: rem-calc(40) 0;
+  }
+}
