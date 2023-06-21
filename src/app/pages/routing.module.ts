@@ -12,7 +12,8 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'details',
+    // aqui recebe o parametro pra ir a pagina de details
+    path: 'details/:id',
     component: DetailsComponent,
   },
 ];

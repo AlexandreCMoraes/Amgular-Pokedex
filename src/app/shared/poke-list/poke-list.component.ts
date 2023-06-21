@@ -16,8 +16,12 @@ export class PokeListComponent implements OnInit {
   ngOnInit(): void {
     this.pokeApiService.apiListAllPokemons.subscribe((res) => {
       this.getAllPokemons = res.results;
-      console.log(`Com todos os detalhes (status)`, res);
-      console.log(`Todos os pokemons`, this.getAllPokemons);
+      // console.log(`Com todos os detalhes (status)`, res);
+      // console.log(`Todos os pokemons`, this.getAllPokemons);
     });
+  }
+
+  public getSearch(value: string) {
+    console.log(value);
   }
 }
