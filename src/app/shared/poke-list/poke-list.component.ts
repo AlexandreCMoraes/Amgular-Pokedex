@@ -12,6 +12,6 @@ export class PokeListComponent implements OnInit {
   constructor(private pokeApiService: PokeApiService) {}
   // assim que carrega a pagina, é mostrado as dados
   ngOnInit(): void {
-    this.pokeApiService.apiListAllPokemons.subscribe((res) => res);
+    this.pokeApiService.apiListAllPokemons.subscribe((res) => console.log(res));
   }
 }

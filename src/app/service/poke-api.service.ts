@@ -12,12 +12,22 @@ export class PokeApiService {
   constructor(private http: HttpClient) {}
   // pagando dados com qualquer valor <any> do Observable para nao ter que ficar tipando os dados recebidos
   get apiListAllPokemons(): Observable<any> {
-    // retornando dados qualquer com <any> e
+    // retornando dados qualquer com <any> mostrando assim que disponiveis com pipe. Poderia usar map, mas tap (rxjs) nao modifica "dados?"e so mostra
     return this.http.get<any>(this.url).pipe(
       tap((res) => res),
       tap((res) => {
-        console.log(res);
+        // results é do que traz a api com os dados dos pokemon
+        res.results.map((resPokemons: any) => {
+          this.apiGetPokemons(resPokemons.url).subscribe(
+            (res) => (resPokemons.status = res)
+          );
+        });
+        // console.log(res);
       })
     );
+  }
+
+  public apiGetPokemons(url: string): Observable<any> {
+    return this.http.get<any>(url).pipe((res) => res);
   }
 }
