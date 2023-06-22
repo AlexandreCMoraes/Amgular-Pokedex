@@ -11,6 +11,9 @@ import { PokeApiService } from 'src/app/service/poke-api.service';
 export class DetailsComponent implements OnInit {
   private urlPokemon: string = 'https://pokeapi.co/api/v2/pokemon';
   private urlName: string = 'https://pokeapi.co/api/v2/pokemon-species';
+
+  // mostrar em tela
+  public pokemon: any;
   constructor(
     private activatedRouter: ActivatedRoute,
     private pokeApiService: PokeApiService
@@ -18,10 +21,10 @@ export class DetailsComponent implements OnInit {
 
   // inicia ja pegando o metodo
   ngOnInit(): void {
-    this.pokemon;
+    this.getPokemon;
   }
 
-  get pokemon() {
+  get getPokemon() {
     // pegando o iddo pokemon
     const id = this.activatedRouter.snapshot.params['id'];
     // pegando os pokemons
@@ -31,9 +34,10 @@ export class DetailsComponent implements OnInit {
     // pega a especie do pokemon e vai retornar na pagina de detalhes
     const name = this.pokeApiService.apiGetPokemons(`${this.urlName}/${id}`);
 
-    // carrega(busca) as duas api de pokemon e name e depois da a resposta. acompanha o andamento das requisições (observables) passadas como parâmetro e emite um sinal quando todas as requisições forem finalizadas.
+    // carrega(busca) as duas api de pokemon(lista) e name() e depois da a resposta. acompanha o andamento das requisições (observables) passadas como parâmetro e emite um sinal quando todas as requisições forem finalizadas.
     return forkJoin([pokemon, name]).subscribe((res) => {
       console.log(res);
+      this.pokemon = res;
     });
   }
 }

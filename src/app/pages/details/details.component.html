@@ -1,4 +1,32 @@
 <poke-header></poke-header>
 <main>
-  
+  <!-- Nome do pokemon (portugues e japones) -->
+  <section class="pokemon__names">
+    <h1>{{ pokemon[0].name }}</h1>
+    <h2>{{ pokemon[1].names[0].name }}</h2>
+  </section>
+
+  <!-- imagem do pokemon -->
+  <section class="pokemon__status">
+    <img
+      [src]="pokemon[0].sprites.other.dream_world.front_default"
+      [alt]="pokemon[0].name"
+    />
+  </section>
+
+  <!-- estatisticas gerais-->
+  <article class="pokemon__status__statistics">
+    <section>
+      <h3>Estatísticas</h3>
+      <ol>
+        <li *ngFor="let value of pokemon[0].stats">
+          {{ value.stat.name }}
+          <strong>{{ value.base_stat }}</strong>
+        </li>
+      </ol>
+    </section>
+
+    <!-- botao para voltar -->
+    <a [routerLink]="['']" class="btn btn__secondary">Voltar</a>
+  </article>
 </main>
