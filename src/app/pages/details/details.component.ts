@@ -14,6 +14,11 @@ export class DetailsComponent implements OnInit {
 
   // mostrar em tela
   public pokemon: any;
+  // mostrar se esta carregando a pagina enquanto no mostra nada
+  public isLoading: boolean = false;
+  //
+  public apiError: boolean = false;
+
   constructor(
     private activatedRouter: ActivatedRoute,
     private pokeApiService: PokeApiService
@@ -31,13 +36,21 @@ export class DetailsComponent implements OnInit {
     const pokemon = this.pokeApiService.apiGetPokemons(
       `${this.urlPokemon}/${id}`
     );
+
     // pega a especie do pokemon e vai retornar na pagina de detalhes
     const name = this.pokeApiService.apiGetPokemons(`${this.urlName}/${id}`);
 
     // carrega(busca) as duas api de pokemon(lista) e name() e depois da a resposta. acompanha o andamento das requisições (observables) passadas como parâmetro e emite um sinal quando todas as requisições forem finalizadas.
-    return forkJoin([pokemon, name]).subscribe((res) => {
-      console.log(res);
-      this.pokemon = res;
-    });
+    return forkJoin([pokemon, name]).subscribe(
+      (res) => {
+        console.log(res);
+        this.pokemon = res;
+        // qnd estiver tudo certo, mostra em tela
+        this.isLoading = true;
+      },
+      (error) => {
+        this.apiError = true;
+      }
+    );
   }
 }

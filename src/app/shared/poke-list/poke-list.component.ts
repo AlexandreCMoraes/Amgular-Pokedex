@@ -12,15 +12,23 @@ export class PokeListComponent implements OnInit {
   private setAllPokemons: any;
   public getAllPokemons: any;
 
+  public apiError: boolean = false;
+
   constructor(private pokeApiService: PokeApiService) {}
   // assim que carrega a pagina, é mostrado as dados
   ngOnInit(): void {
-    this.pokeApiService.apiListAllPokemons.subscribe((res) => {
-      this.setAllPokemons = res.results;
-      this.getAllPokemons = this.setAllPokemons;
-      // console.log(`Com todos os detalhes (status)`, res);
-      // console.log(`Todos os pokemons`, this.getAllPokemons);
-    });
+    this.pokeApiService.apiListAllPokemons.subscribe(
+      (res) => {
+        this.setAllPokemons = res.results;
+        this.getAllPokemons = this.setAllPokemons;
+        // console.log(`Com todos os detalhes (status)`, res);
+        // console.log(`Todos os pokemons`, this.getAllPokemons);
+        // this.apiError = true;
+      },
+      (error) => {
+        this.apiError = true;
+      }
+    );
   }
 
   public getSearch(value: string) {
@@ -30,7 +38,7 @@ export class PokeListComponent implements OnInit {
       // verifica se igual  a api
       return !res.name.indexOf(value.toLowerCase());
     });
-    // aqui tem os dados cheio 
+    // aqui tem os dados cheio
     this.getAllPokemons = filter;
   }
 }
