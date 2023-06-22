@@ -29,6 +29,7 @@ export class DetailsComponent implements OnInit {
     this.getPokemon;
   }
 
+  // trocar para public em caso de erro ao subir pagina(build)
   get getPokemon() {
     // pegando o iddo pokemon
     const id = this.activatedRouter.snapshot.params['id'];
